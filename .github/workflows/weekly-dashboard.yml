@@ -1,8 +1,11 @@
 name: Weekly Dashboard
 
 on:
+  push:
+    branches:
+      - main
   schedule:
-    - cron: '59 14 * * 0'
+    - cron: '59 14 * * 0'  # Sunday 23:59 KST (UTC 기준)
   workflow_dispatch:
 
 jobs:
@@ -12,14 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Generate stats
-        uses: actions/github-script@v6
+      - name: Generate Weekly Stats
         id: stats
+        uses: actions/github-script@v6
         with:
           script: |
             const org = context.repo.owner;
             const repo = context.repo.repo;
 
+            // 1️⃣ Organization 멤버 가져오기
             const { data: members } = await github.rest.orgs.listMembers({
               org: org,
               per_page: 100
@@ -27,13 +31,21 @@ jobs:
 
             const memberLogins = members.map(m => m.login);
 
+            // 2️⃣ 이번 주 월요일 00:00 KST 계산
             const now = new Date();
-            const day = now.getUTCDay();
-            const diff = day === 0 ? 6 : day - 1;
-            const monday = new Date(now);
-            monday.setUTCDate(now.getUTCDate() - diff);
-            monday.setUTCHours(0,0,0,0);
+            const kstOffset = 9 * 60 * 60 * 1000;
+            const kstNow = new Date(now.getTime() + kstOffset);
 
+            const day = kstNow.getUTCDay();
+            const diff = day === 0 ? 6 : day - 1;
+
+            const mondayKST = new Date(kstNow);
+            mondayKST.setUTCDate(kstNow.getUTCDate() - diff);
+            mondayKST.setUTCHours(0, 0, 0, 0);
+
+            const mondayUTC = new Date(mondayKST.getTime() - kstOffset);
+
+            // 3️⃣ Merge된 PR 가져오기
             const { data: pulls } = await github.rest.pulls.list({
               owner: org,
               repo: repo,
@@ -42,9 +54,10 @@ jobs:
             });
 
             const weekly = pulls.filter(pr =>
-              pr.merged_at && new Date(pr.merged_at) >= monday
+              pr.merged_at && new Date(pr.merged_at) >= mondayUTC
             );
 
+            // 4️⃣ 멤버별 카운트 초기화
             const counts = {};
             memberLogins.forEach(user => counts[user] = 0);
 
@@ -54,7 +67,10 @@ jobs:
               }
             });
 
-            let table = "| Member | Count | Status |\n";
+            // 5️⃣ Markdown 테이블 생성
+            let table = "";
+            table += `📅 기준: ${mondayKST.toISOString().slice(0,10)} (월요일 00:00 KST)\n\n`;
+            table += "| Member | Count | Status |\n";
             table += "|--------|-------|--------|\n";
 
             for (const user of memberLogins) {
@@ -68,9 +84,11 @@ jobs:
       - name: Inject into README
         run: |
           TABLE="${{ steps.stats.outputs.result }}"
+
           awk -v table="$TABLE" '
           /<!-- WEEKLY_DASHBOARD_START -->/ {
             print;
+            print "";
             print table;
             skip=1;
             next;
@@ -80,6 +98,7 @@ jobs:
           }
           !skip
           ' README.md > temp.md
+
           mv temp.md README.md
 
       - name: Commit changes
