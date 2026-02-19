@@ -14,7 +14,7 @@
 | alicebsy | 1 | ❌ |
 | godten-cmd | 5 | ✅ |
 | gun9212 | 4 | ❌ |
-| onff02 | 1 | ❌ |
+| onff02 | 2 | ❌ |
 | orca-svg | 2 | ❌ |
 | sungjaep11 | 5 | ✅ |
 | tomchaccom | 5 | ✅ |
