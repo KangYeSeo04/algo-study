@@ -9,8 +9,9 @@
 | Member | Count | Status |
 |--------|-------|--------|
 | KangYeSeo04 | 1 | ❌ |
-| Nul0luN | 1 | ❌ |
-| orca-svg | 4 | ❌ |
+| Nul0luN | 2 | ❌ |
+| alicebsy | 1 | ❌ |
+| orca-svg | 11 | ✅ |
 <!-- WEEKLY_DASHBOARD_END -->
 
 
