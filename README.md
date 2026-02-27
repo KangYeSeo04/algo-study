@@ -9,12 +9,12 @@
 | Member | Count | Status |
 |--------|-------|--------|
 | KangYeSeo04 | 2 | ❌ |
-| Nul0luN | 4 | ❌ |
+| Nul0luN | 12 | ✅ |
 | alicebsy | 2 | ❌ |
-| hjxarchive | 1 | ❌ |
-| orca-svg | 11 | ✅ |
-| sungjaep11 | 1 | ❌ |
-| tomchaccom | 3 | ❌ |
+| hjxarchive | 5 | ✅ |
+| orca-svg | 16 | ✅ |
+| sungjaep11 | 2 | ❌ |
+| tomchaccom | 4 | ❌ |
 <!-- WEEKLY_DASHBOARD_END -->
 
 
