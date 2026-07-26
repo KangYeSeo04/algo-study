@@ -9,7 +9,7 @@
 |--------|-------|--------|
 | KangYeSeo04 | 5 | ✅ |
 | LYoooJ | 5 | ✅ |
-| onff02 | 1 | ❌ |
+| onff02 | 2 | ❌ |
 <!-- WEEKLY_DASHBOARD_END -->
 
 ---
