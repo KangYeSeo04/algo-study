@@ -8,7 +8,7 @@
 | Member | Count | Status |
 |--------|-------|--------|
 | haeunjeon0410 | 5 | ✅ |
-| onff02 | 4 | ❌ |
+| onff02 | 5 | ✅ |
 <!-- WEEKLY_DASHBOARD_END -->
 
 ---
