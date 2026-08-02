@@ -8,6 +8,7 @@
 | Member | Count | Status |
 |--------|-------|--------|
 | LYoooJ | 5 | ✅ |
+| alicebsy | 1 | ❌ |
 | haeunjeon0410 | 5 | ✅ |
 | onff02 | 5 | ✅ |
 | sungjaep11 | 4 | ❌ |
