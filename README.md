@@ -7,7 +7,7 @@
 
 | Member | Count | Status |
 |--------|-------|--------|
-| - | 0 | ❌ |
+| tomchaccom | 5 | ✅ |
 <!-- WEEKLY_DASHBOARD_END -->
 
 ---
